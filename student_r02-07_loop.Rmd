@@ -29,7 +29,9 @@ print(nums[5])
 nums <- c(10, 20, 30, 40, 50)
 
 # 用for loop印出印出 nums 中的數字
-
+for (x in nums) {
+  print (x)
+}
 
 ```
 
@@ -45,7 +47,10 @@ nums <- c(10, 20, 30, 40, 50)
 ```{r}
 
 grades = c(80, 70, 69, 50, 92)
-
+for (x in grades){
+  if (x>70)
+    print(paste0("Your Score is ",x, ", which is more than 70"))
+}
 
 
 ```
@@ -55,7 +60,12 @@ grades = c(80, 70, 69, 50, 92)
 
 fruits <- list("apple", "banana", "cherry")
 
-
+for (x in fruits){
+  if (x== "cherry"){
+    break
+  }
+  print(x)
+}
 ```
 
 ### 5 next?
