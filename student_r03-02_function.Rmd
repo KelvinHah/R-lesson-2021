@@ -39,6 +39,7 @@ say_hello <- function(){
 
 say_hello()
 
+
 ```
 
 ## 3 吃參數的function
@@ -430,7 +431,10 @@ factorial(5)
 - 請寫出一函數 calc_bmi(height_m, weight_kg)，計算並返回 bmi值。
 ```{r}
 calc_bmi <- function(height_m, weight_kg) {
-
+  # BMI Formula#
+  bmi <-  weight_kg / (height_m^2)
+  #Retrun BMI#
+  return(bmi)
 }
 
 calc_bmi(1.76, 70)
@@ -465,8 +469,18 @@ print_numSeq(5)
 d <- c(1, 2, 3, 4, 5, 9, 10, 17, 20,21, 25, 30, 35, 40, 50, 100, 110, 120)
 
 cut_numGroup <- function(num) {
+  if (num> 50){
+    return("A_51_up")  
+  }else if (num>30) {
+    return("B_31_50")
+  } else if (num>10){
+    return ("C_11_30")
+  }else {
+    return("D_0_10")}
+  }
+ 
 
-}
+
 
 # 迴圈方式
 group_d <- c()

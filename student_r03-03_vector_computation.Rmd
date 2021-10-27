@@ -267,6 +267,7 @@ compact(nums)
 library(stringr)
 userNames <- c("Jay", "James", "Cathy", "Joe", "jen", "Frey")
 
+keep(userNames, ~str_starts(.x, "J"))
 
 ```
 
@@ -286,6 +287,13 @@ phone_nums <- c(
   "0910351123", "0922212333", "0933621333"
 )
 
+# Obtain Starting with 09
+keep(phone_nums, ~str_starts(.x, "09") &  )
 
+# Keep 10 digits
+keep(phone_nums, ~str_length(.x)==10 )
 
+# Change last 3 digit to XXX
+str_sub(phone_nums, start=-3,  end=-1) <-"XXX"
+phone_nums
 ```
