@@ -15,8 +15,8 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r}
 t_matrix <- matrix(
   c(1,2,3,4,5,6), 
-  nrow = , 
-  ncol = 
+  nrow = 2 ,
+  ncol = 3
 )
 t_matrix
 
@@ -33,13 +33,14 @@ t_matrix
 
 
 # 型態
-
+class(t_matrix)
+typeof(t_matrix)
 
 # 維度
-
+dim(t_matrix)
 
 # 長度
-
+length(t_matrix)
 
 ```
 ### 調用
@@ -52,15 +53,15 @@ thismatrix <- matrix(
 thismatrix
 
 # 取出 指定位置 (row, col)
-thismatrix
+thismatrix[1,2]
 
 # 取出 指定 row
-thismatrix
-thismatrix
+thismatrix [1,]
+thismatrix [1:2,]
 
 # 取出 指定 col
-thismatrix
-thismatrix
+thismatrix [,2]
+thismatrix [,2:3]
 
 ```
 
@@ -74,12 +75,14 @@ thismatrix <- matrix(
 thismatrix
 
 # 新增 column
-
+cbind(thismatrix, c("H","J"))
 
 # 新增 row
-
+rbind(thismatrix,c("K","L","M"))
 
 # 注意當維度不同時候..
+rbind(thismatrix, c("J","K","L","O"))
+cbind(thismatrix, c("O","P"))
 
 ```
 
@@ -93,10 +96,10 @@ thismatrix <- matrix(
 thismatrix
 
 # 刪除row
-
+thismatrix [-c(1),]
 
 # 刪除column
-
+thismatrix[, -c(2)]
 
 ```
 
@@ -110,7 +113,8 @@ thismatrix <- matrix(
 thismatrix
 
 
-thismatrix[1] <- 
+
+thismatrix[3] <- "P"
 thismatrix
 
 ```
@@ -129,10 +133,13 @@ df1 <- data.frame (
 df1
 
 # 查看型態
-
+class(df1)
+typeof(df1)
 
 # 查看 col row 長度
-
+ncol(df1)
+nrow(df1)
+dim(df1)
 ```
 
 ```{r}
@@ -147,12 +154,15 @@ cars_df <- cars
 summary(cars_df)
 
 # 前n筆
-
+head(cars_df)
+head(cars_df, 7)
 
 # 後n筆
-
+tail(cars_df)
+tail(cars_df,3)
 
 # 開啟瀏覽頁
+View(cars_df)
 
 
 ```
@@ -164,21 +174,22 @@ class(Titanic)
 class(titanic_df)
 
 # 檢視欄位
-
-
-# 調用特定 column
-titanic_df
-titanic_df
-titanic_df
+class(titanic_df)
+typeof(titanic_df)
 
 # 調用特定 column
-titanic_df
+titanic_df$Class
+titanic_df [,3]
+titanic_df [["Survived"]]
+
+# 調用特定 column
+titanic_df [,2]
 titanic_df
 titanic_df
 
 # 調用特定 column
-titanic_df
-titanic_df
+titanic_df[,3:4]
+titanic_df [c("Age", "Survived")]
 titanic_df
 
 # 調用多個 columns
@@ -196,7 +207,7 @@ df <- data.frame (
   Price = c(100, 150, 120, 125)
 )
 
-df <- (df, c("Cherry", 110))
+df <-rbind (df, c("Cherry", 110))
 df
 
 # 新增 column
@@ -205,7 +216,7 @@ df <- data.frame (
   Price = c(100, 150, 120, 125)
 )
 
-df <- (df, Weight = c(50, 55, 35, 60))
+df <- cbind(df, Weight = c(50, 55, 35, 60))
 df
 
 ```
@@ -217,10 +228,10 @@ df <- data.frame (
 )
 
 # 刪除 row
-
+df[,-c(2)]
 
 # 刪除 column
-
+df[,-2]
 
 ```
 
@@ -237,7 +248,7 @@ df1 <- data.frame (
 library("data.table")
 dt1 <- data.table(df1)
 
-dt1[Pulse>100]
+dt1[Duration>45]
 
 ```
 
@@ -252,7 +263,12 @@ dt1[Pulse>100]
 user_names <- c("Ken", "Jen", "Max")
 grades <- c(90, 92, 89)
 
-df <- 
+df <- data.frame(
+  USN= user_names ,
+  Grades= grades
+  
+)
+
 ```
 
 ### 練習2
@@ -261,15 +277,16 @@ df <-
 cars_df <- cars
 
 # Q1: 請使用進行摘要
-
+summary(cars_df)
 
 # Q2: 請問 cars_df 共有幾 rows, 幾 columns
-
+nrow(cars_df)
+ncol(cars_df)
 
 # Q3: 請選出 speed 欄位的資料
-
+cars_df $speed
 
 # Q4: 請問 speed 欄位最大值為何
-
+min(cars_df $speed)
 
 ```
