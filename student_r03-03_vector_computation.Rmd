@@ -92,6 +92,7 @@ multiple_10 <- function(num) {num*10}
 t_data <- c(1,2,3,4,5)
 sapply(t_data, multiple_10)
 
+
 ```
 
 ### 2.2 mapply
@@ -191,7 +192,7 @@ add_10 <- function(num){x+10}
 muti_5 <- function(num){x*5}
 
 # function層 寫法
-x <- 10
+x <- c(10, 20, 30)
 muti_5(add_10(x))
 
 # pipe %>%寫法
@@ -287,13 +288,24 @@ phone_nums <- c(
   "0910351123", "0922212333", "0933621333"
 )
 
-# Obtain Starting with 09
-keep(phone_nums, ~str_starts(.x, "09") &  )
 
-# Keep 10 digits
-keep(phone_nums, ~str_length(.x)==10 )
+# Obtain Starting with 09 and Keep 10 Digits Function
 
-# Change last 3 digit to XXX
-str_sub(phone_nums, start=-3,  end=-1) <-"XXX"
-phone_nums
+
+val_phone <- function(p) {
+  if (str_starts(p,"09") & str_length(p) ==10){
+    return(TRUE)
+  }
+  return(FALSE)
+}
+
+cover <- function(p){
+  str_sub(p, -3, -1) <- "XXX"
+  return(p)
+}
+
+
+phone_nums %>%
+  keep(val_phone)%>%
+  map_chr(cover)
 ```

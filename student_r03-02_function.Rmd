@@ -447,7 +447,10 @@ calc_bmi(1.76, 70)
 ```{r}
 
 print_numSeq <- function(num) {
-
+  print(num)
+    if(num>1){
+      print_numSeq(num-1)
+    }
 }
 print_numSeq(5)
 
