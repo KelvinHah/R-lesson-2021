@@ -1,0 +1,84 @@
+---
+title: "Untitled"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+df_cars <- cars
+
+library(ggplot2)
+
+p2<- ggplot(
+  df_cars,
+  aes(x=speed)
+)+
+  geom_histogram(bins = 5)
+
+p2
+
+p <- ggplot(
+  df_cars,
+  aes(x=speed, y=dist)) + 
+  geom_point(
+    color="red",
+    fill="00000000",
+    shape=21,
+    alpha=0.5,
+    size=6,
+    stroke=6,
+  )
+
+p
+```
+``` {r iris}
+library(ggplot2)
+
+df_iris <- iris
+
+od<- ggplot(df_iris,
+       aes(x=Species, y=Sepal.Width, fill=Species)
+       )+
+  geom_boxplot()
+
+od
+
+
+
+```
+
+```{r gganimate}
+library(gapminder)
+library(gganimate)
+
+gappy<-gapminder
+
+p<- ggplot(
+  gappy,aes(x=gdpPercap, y=lifeExp, size=pop, colour=country)
+  )+
+  geom_point(alpha= 0.7, show.legend = FALSE)+
+  scale_color_manual(values = country_colors)+
+  scale_size (range = c(2,12))+
+  scale_x_log10()+
+  facet_wrap(~continent)+
+  labs ( title= 'Year: {frame_time}', x = 'GDP per Capita', y='life expectancy' ) + 
+transition_time (year)+
+ease_aes ('linear')
+
+p
+
+
+
+
+
+
+```
