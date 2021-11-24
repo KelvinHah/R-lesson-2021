@@ -108,15 +108,21 @@ df <- data.frame(res$records)
 ## 以下為參考示意
 
 # 1 爬取
-url <- ""
-res <- 
+url <- "https://data.taipei/api/v1/dataset/8f690548-61bc-4bff-8baa-01d465eb672c?scope=resourceAquire"
+res <- fromJSON(url)
 
 # 2 取出資料
-df <- 
+df <- res$result$results
 
 
 # 3 前處理
+parse_m <- function(originM) {
+  t <- str_split(originM, "年")
+  y <-(as.integer(t[1])+1911)
+  m <-as.integer(str_split(t[2], "月") [[1]][1])
   
+  ym<-paste0(y, "-", m , "-", "01")
+}
 
 # 4 繪圖
 

@@ -17,9 +17,9 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## 1.1 套件
 ```{r}
-# library("ggplot2")
+library("ggplot2")
 library("tidyverse")
-
+library("dplyr")
 ```
 
 ## 1.2 範例
@@ -27,10 +27,13 @@ library("tidyverse")
 iris_df <- iris
 
 # 1.2.1 不分組
-ggplot(
+f<- ggplot(
   data = iris_df,                         # 1 資料表
   aes(x=Sepal.Length, y=Sepal.Width)) +   # 2 座標軸對應之資料欄位
-  geom_point(size=3, color="#69b3a2")     # 3 繪圖方式
+  geom_point(size=3, color="#69b3a2") 
+f
+
+# 3 繪圖方式
 
 # 1.2.2 分佈圖
 ggplot(
@@ -53,8 +56,11 @@ ggplot(
   facet_wrap(~Species) 
 
 # 可以繪圖, 但是意義是?
-# ggplot(iris_df, aes(x=Sepal.Length, y=Sepal.Width)) +
-#   geom_line()
+ggplot(
+  iris_df, 
+  aes(x=Sepal.Length, y=Sepal.Width)) +
+  geom_line()+
+  facet_wrap(~Species)
 
 ```
 
@@ -63,17 +69,18 @@ ggplot(
 
 ## 2.1 套件
 ```{r}
-# install.packages("plotly")
+install.packages("plotly")
 library(plotly)
 
 ```
 
 ## 2.2 範例
 ```{r}
+iris_df<-iris
 fig <- plot_ly(
   data = iris_df,    # 1 資料表
-  x = ~Sepal.Length, # 2 x軸對應 欄位
-  y = ~Petal.Length, # 3 y軸對應 欄位
+  x = ~Petal.Length, # 2 x軸對應 欄位
+  y = ~Petal.Width, # 3 y軸對應 欄位
   color = ~Species,  # 4 顏色對應 分組
   type="scatter"     # 5 繪圖方式
 )
@@ -86,7 +93,7 @@ fig
 
 ## 3.1 套件
 ```{r}
-# install.packages("leaflet")
+install.packages("leaflet")
 library(leaflet)
 library(tidyverse) # 讀範例資料用
 
@@ -96,7 +103,7 @@ library(tidyverse) # 讀範例資料用
 ```{r}
 # 基本設定
 where <- list(lng=121.4501143, lat=25.1764033)
-where_popup <- 商管大樓
+where_popup <- "商管大樓"
 
 # 繪圖
 map <- leaflet() %>%
@@ -174,7 +181,8 @@ ggplot(
   aes(x=plotOrder, y=priceMean)) +
   geom_bar(stat="identity", fill="#f68060", alpha=.6, width=.4) +
   coord_flip() +
-  xlab("") +
+  xlab("Country") +
+  ylab("Median")
   theme_bw()
 
 ```
